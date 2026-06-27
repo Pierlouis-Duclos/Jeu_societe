@@ -4,6 +4,7 @@ package logiqueJeu;
 import java.awt.*;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class LogiqueJeu {
@@ -26,7 +27,19 @@ public class LogiqueJeu {
      */
     private LinkedBlockingDeque<Integer> pileADeplacer = new LinkedBlockingDeque<>();
 
+    /**
+     * garde en mémoire quel est le joueur courant, {@code 0} pour le joueur
+     * <span style:color=blue>bleu</span>, {@code 1} pour le joueur
+     * <span style:color=red>rouge</span> <br><br> La valeur de cette variable est modifiée par
+     * les méthodes {@code debuterPartie()} (qui la remet à 0) et {@code jouerCoup(.)} (qui
+     * la fait changer lors de la fin du tour d'un joueur (lorsque {@code pileADeplacer} est vide))
+     */
     private Integer joueurCourant = 0;
+
+    /**
+     * permet de déterminer qui a remporté la partie
+     */
+    private int gagnant = -1;
 
     public LogiqueJeu() {
         for (int i = 0; i < 4; i++) {
@@ -34,7 +47,6 @@ public class LogiqueJeu {
                 listeJeu[i][j] = new LinkedBlockingDeque<>();
             }
         }
-        joueurCourant = 0;
         debuterPartie();
     }
 
@@ -46,7 +58,10 @@ public class LogiqueJeu {
         listeJeu[1][2].push(-1);
         listeJeu[2][1].push(-1);
         listeJeu[3][3].push(-1);
+        gagnant = -1;
+        joueurCourant = 0;
         partieTerminee = false;
+
     }
 
     /**
@@ -104,7 +119,9 @@ public class LogiqueJeu {
 
     /**
      * Vérifie si le coup reçu en paramètre est permis (s'il ne se
-     * trouve pas dans {@code listeDeplacements})
+     * trouve pas dans {@code listeDeplacements} et s'il se trouve
+     * dans les 8 cases sur le pourtour de celle où a été joué le
+     * dernier coup)
      *
      * @param coordonneesGrille les coordonnées du coup à vérifier
      * @return {@code true} si le coup est permis, {@code false} sinon
@@ -147,7 +164,41 @@ public class LogiqueJeu {
      * <br>{@code false} sinon
      */
     public boolean estTerminee() {
+        boolean a;
+        boolean b;
+        boolean c;
+        for (int i = 0; i < 4 && !partieTerminee; i++) {
+            //vérification de si la ième colonne est un tictactoe pour un des 2 joueurs
+            a = Objects.equals(listeJeu[i][0].peek(), listeJeu[i][1].peek());
+            b = Objects.equals(listeJeu[i][1].peek(), listeJeu[i][2].peek());
+            c = Objects.equals(listeJeu[i][2].peek(), listeJeu[i][3].peek());
 
+            if (!(a && b && c && !Objects.equals(listeJeu[i][0].peek(), -1) && !Objects.isNull(listeJeu[i][0].peek()))) {
+                //vérification de si la ième ligne est un tictactoe pour un des 2 joueurs
+                a = Objects.equals(listeJeu[0][i].peek(), listeJeu[1][i].peek());
+                b = Objects.equals(listeJeu[1][i].peek(), listeJeu[2][i].peek());
+                c = Objects.equals(listeJeu[2][i].peek(), listeJeu[3][i].peek());
+            }
+            if (a && b && c && !Objects.equals(listeJeu[i][i].peek(), -1) && !Objects.isNull(listeJeu[i][i].peek())) {
+                partieTerminee = true;
+                gagnant = listeJeu[i][i].peek();
+            }
+        }
+        //vérification des diagonales
+        if (!partieTerminee) {
+            a = Objects.equals(listeJeu[0][0].peek(), listeJeu[1][1].peek());
+            b = Objects.equals(listeJeu[1][1].peek(), listeJeu[2][2].peek());
+            c = Objects.equals(listeJeu[2][2].peek(), listeJeu[3][3].peek());
+            partieTerminee = a && b && c && !Objects.equals(listeJeu[0][0].peek(), -1) && !Objects.isNull(listeJeu[0][0].peek());
+            gagnant = (partieTerminee ? listeJeu[0][0].peek() : -1);
+            if (!partieTerminee) {
+                a = Objects.equals(listeJeu[3][0].peek(), listeJeu[2][1].peek());
+                b = Objects.equals(listeJeu[2][1].peek(), listeJeu[1][2].peek());
+                c = Objects.equals(listeJeu[1][2].peek(), listeJeu[0][3].peek());
+                partieTerminee = a && b && c && !Objects.equals(listeJeu[3][0].peek(), -1) && !Objects.isNull(listeJeu[3][0].peek());
+                gagnant = (partieTerminee ? listeJeu[3][0].peek() : -1);
+            }
+        }
         return partieTerminee;
     }
 
@@ -173,5 +224,9 @@ public class LogiqueJeu {
     public Integer getDessousPileADeplacer() {
         assert !pileADeplacer.isEmpty();
         return pileADeplacer.peekLast();
+    }
+
+    public int getGagnant() {
+        return gagnant;
     }
 }
