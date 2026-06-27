@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="logiqueJeu.ControleurInterface">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Aide" />
+          </items>
+        </Menu>
+            <Menu mnemonicParsing="false" onAction="#debuterPartie" text="Jouer">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#debuterPartie" text="Poulailler" />
+               </items></Menu>
+      </menus>
+    </MenuBar>
+      <StackPane VBox.vgrow="ALWAYS">
+         <children>
+          <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0">
+            <items>
+              <AnchorPane fx:id="coteBleu" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Circle id="blue" fill="DODGERBLUE" layoutX="111.0" layoutY="275.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="blue" fill="DODGERBLUE" layoutX="111.0" layoutY="260.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="blue" fill="DODGERBLUE" layoutX="111.0" layoutY="251.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="blue" fill="DODGERBLUE" layoutX="111.0" layoutY="242.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="blue" fill="DODGERBLUE" layoutX="111.0" layoutY="236.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="blue" fill="DODGERBLUE" layoutX="111.0" layoutY="228.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="blue" fill="DODGERBLUE" layoutX="111.0" layoutY="212.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="blue" fill="DODGERBLUE" layoutX="111.0" layoutY="197.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                     </children>
+              </AnchorPane>
+            <AnchorPane id="Content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0">
+              <children>
+                        <GridPane fx:id="grilleJeu" alignment="CENTER" gridLinesVisible="true" prefHeight="551.0" prefWidth="443.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Pane id="0" fx:id="pane0" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" />
+                              <Pane id="1" fx:id="pane1" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                              <Pane id="2" fx:id="pane2" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                              <Pane id="3" fx:id="pane3" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                              <Pane id="4" fx:id="pane4" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                              <Pane id="5" fx:id="pane5" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Pane id="6" fx:id="pane6" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Pane id="7" fx:id="pane7" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                              <Pane id="8" fx:id="pane8" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
+                              <Pane id="9" fx:id="pane9" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Pane id="10" fx:id="pane10" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Pane id="11" fx:id="pane11" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <Pane id="12" fx:id="pane12" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                              <Pane id="13" fx:id="pane13" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Pane id="14" fx:id="pane14" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <Pane id="15" fx:id="pane15" onMouseEntered="#mouseHoverGrid" onMouseExited="#mouseUnhoveredGrid" onMouseReleased="#mouseReleasedPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                           </children>
+                        </GridPane>
+              </children>
+            </AnchorPane>
+              <AnchorPane fx:id="coteRouge">
+                     <children>
+                        <Circle id="red" fill="RED" layoutX="111.0" layoutY="196.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="red" fill="RED" layoutX="111.0" layoutY="181.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="red" fill="RED" layoutX="111.0" layoutY="170.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="red" fill="RED" layoutX="111.0" layoutY="157.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="red" fill="RED" layoutX="111.0" layoutY="149.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="red" fill="RED" layoutX="111.0" layoutY="142.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Circle id="red" fill="RED" layoutX="111.0" layoutY="131.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+                     </children>
+              </AnchorPane>
+            </items>
+          </SplitPane>
+         </children>
+      </StackPane>
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+      <children>
+        <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ProgressBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="894.0" progress="0.0" />
+               </children></Pane>
+      </children>
+      <padding>
+        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+      </padding>
+    </HBox>
+  </children>
+</VBox>
